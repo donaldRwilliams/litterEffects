@@ -20,11 +20,10 @@
 #' @examples
 #' bias_correction()
 
-bias_correction <- function(nsim = 500, icc, v_overall, 
-                            n_litters, pups_litter){
-  p_values <-  replicate(nsim, data_func(icc, v_overall, n_litters, pups_litter)) 
-  results(p_values)
-  
+bias_correction <- function(nsim = 500, icc, v_overall, n_litters, pups_litter){ 
+                   p_values <-  replicate(nsim, data_func(icc, v_overall, 
+                                          n_litters, pups_litter)) 
+results(p_values)
 }
 
 
