@@ -9,13 +9,13 @@ bias_correction(nsim = 500, icc, v_overall, n_litters, pups_litter)
 \arguments{
 \item{nsim}{Number of simulations. Default is set to 500}
 
-\item{icc}{Intra-class correlation coefficient for the litter effect (proportion of v_overall)}
+\item{icc}{Intra-class correlation coefficient for the litter effect (between 0.05 to 0.95 of the total variance)}
 
 \item{v_overall}{total variance (litter + residual variance)}
 
 \item{n_litters}{Number of litters in the study (or number of schools)}
 
-\item{pups_litter}{Number of observations per litter (or students from a given school)}
+\item{pups_litter}{Number observations per litter (or student from a given school)}
 }
 \description{
 This function allows the user to determine the "correct" bias correction
@@ -27,13 +27,13 @@ It should also be noted that this function is for a specific design, that
 has observations completely nested within a higher level unit. For example,
 litter mates (rodents from same mother) are all categorized one way. In reference
 to educational settings, this would be equivalent to entire schools receiving 
-an intervention and the students as the observational units.
+an intervention and the students were the observational units.
 }
 \details{
-n_litters must be even. Returned value closest to pretermined alpha level should be used as correction.
+n_litters must be even. Returned value closest to pretermined alpha level should be used as correction
 }
 \examples{
-bias_correction(nsim = 500, icc = .50, v_overall= 10, n_litters = 10, pups_litter = 4)
+bias_correction()
 
 # for loop to investigate type I according to litter number
 
