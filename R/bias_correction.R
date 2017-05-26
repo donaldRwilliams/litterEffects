@@ -1,4 +1,4 @@
-#' GEE Bias Correction (donny)d
+#' GEE Bias Correction 
 #'
 #' This function allows the user to determine the "correct" bias correction
 #' for generalized estimating equations. The corrections are to ensure the
