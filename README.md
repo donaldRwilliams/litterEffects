@@ -1,4 +1,4 @@
 # litterEffects
-The package can be downloaded here:
+Download package here:
 
 devtools::install_github("donaldRwilliams/litterEffects")
