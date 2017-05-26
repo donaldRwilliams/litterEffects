@@ -1,0 +1,11 @@
+Package: litterEffects
+Title: Investigation of Litter Effects
+Version: 0.0.0.9000
+Authors@R: person("Donald", "Williams", email = "drwwilliams@ucdavis.edu", role = c("aut", "cre"))
+Description: The package provides functions to investigate litter effects
+Depends: R (>= 3.3.1), lme4, gee, saws, data.table
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1.9000
+Restart: TRUE
