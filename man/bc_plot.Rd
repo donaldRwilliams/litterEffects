@@ -34,7 +34,8 @@ bc_plot(p, lower = 0.025, upper = 0.065, col_accept = "purple", col_reject = "or
 #--nrow = length of n_lit
  mat <- matrix(ncol = 6, nrow = length(n_lit))
  for(j in 1:length(n_lit)){
- lit <- n_lit[j] mat[j, 1:6] <- bias_correction(nsim = 100, icc = 0.5, 
+ lit <- n_lit[j] 
+ mat[j, 1:6] <- bias_correction(nsim = 100, icc = 0.5, 
                                        v_overall = 10, n_litters = lit , 
                                        pups_litter = 4)[1:6]
                                        }
