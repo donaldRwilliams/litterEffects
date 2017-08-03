@@ -1,0 +1,215 @@
+---
+title: 'litterEffects: Tutorial'
+author: "Donald R. Williams"
+date: "August 2, 2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This tutorial accompanies the paper *Between-litter variation in developmental studies of hormones and behavior: inflated false positives and diminished power*. This tuturial can address all recommendations provided in the manuscript. This tutuorial is not meant to thoroughly cover the topic of analyzing dependent measures. For example, we do not provide information on reporting the results. Guidance here can be found by searching for papers that have used similar analyses in the extant literature. For each section, we begin by providing techniques to obtain the necessary information directly from the fitted models. Each section ends with a convenience function that is included in the litterEffects package
+
+The tutorial is organized as follows:
+
+1. Data Analysis
+    * Multilevel Model (MLM)
+          * Comparing Two Groups
+          * Total variance explianed by litter
+          * Significance testing of the litter effect
+          * Between-litter variance explained by the treatment effect
+    * Generalized Estimating Equation (GEE)
+    * Litter means
+2. Propsective Power
+    * Multilevel Model
+    * Generalized Estimating Equation
+    * Litter means
+3. Retrospective Power
+    * Multilevel Model
+    * Generalized Estimating Equation
+    * Litter means
+4. False Positive Rates
+    * Multilevel Model
+    * Generalized Estimating Equation
+    * Litter means
+5. GEE Bias correction
+
+Install the following packages:
+```{r eval = FALSE, echo = TRUE, error = TRUE}
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("lmerTest")
+install.packages("merTools")
+install.packages(devtools::install_github("donaldRwilliams/litterEffects")))
+```
+Load the following packages:
+```{r eval = FALSE, echo = TRUE}
+# load the following package
+library("ggplot2")
+library("dplyr")
+library("lmerTest")
+library("litterEffects")
+library("merTools")
+```
+
+# 1. Data Analysis
+Begin by creating the data. The dat_no_icc creates data in which litter accounts for 0 % of the total variance (no between-litter variaton). The dat_yes_icc data has some bewtween_litter variation, altough what constitiues large is subjective. Importantly, the chosen values are expectation over the long-run (e.g., mean of many repitions) which means that, for any partiular dataset assuming icc = 0.5 and total variance of 10, this returned values may not necessarily be 5 (50 % of 10). This applies to any values chosen.
+
+```{r echo = T, eval = TRUE}
+# function to create the data
+sim_data <-  function(b_0, b_treat, icc, v_overall, 
+                      n_litters, pups_litter, ...) {
+  # simulate data from a random intercept model
+  # Returns:
+  #   a data.frame with the columns litter, treat, and y
+  v_litter <- icc * v_overall
+  v_error <- v_overall - v_litter
+  litter <- rep(1:n_litters, each = pups_litter)
+  # two treatments
+  treat <- rep(0:1, each = pups_litter * n_litters / 2)
+  treat <- factor(treat, labels = c('C', 'T'))
+  # litter effect
+  litter_eff <- rnorm(n_litters, 0, sqrt(v_litter))
+  # residual
+  residual <- rnorm(n_litters * pups_litter, 0, sqrt(v_error))
+  # the outcome measure
+  y <- b_0 + b_treat * (treat == 'T') + litter_eff[litter] + residual
+  litter <- factor(paste0('l', litter))
+  data.frame(litter, treat, y)
+}
+#intercept
+b_0 <- 5
+# treatment effect (e.g. High vs Low LG)
+b_treat <- 20
+# icc (0 - 0.99)
+icc_no <- 0 
+icc_yes <- 0.5
+# total variance
+v_overall = 10
+# number of litters
+n_litters <- 24
+# pups per litter (must be even)
+pups_litter <- 2
+dat_no_icc <- sim_data(b_0 = b_0, b_treat = b_treat, 
+                       icc = icc_no, v_overall = v_overall, 
+                       n_litters = n_litters, 
+                       pups_litter = pups_litter)
+
+
+dat_yes_icc <- sim_data(b_0 = b_0, b_treat = b_treat, 
+                       icc = icc_yes, v_overall = v_overall, 
+                       n_litters = n_litters, 
+                       pups_litter = pups_litter)
+
+```{r eval=FALSE}
+# view the structur of the data
+print(dat_no_icc)
+``` 
+
+## Multilevel model
+#### Comparing two groups
+
+This first model (mlm_one) investigates the treatment effect between two groups. We use "treatment", but this is simply a comparison between two groups (stress vs control; high vs low; etc.). We also include a t-test (t_one) for comparison. While the results may be similar, please note the differences in *p*-values: 5 one-hundreths of a decimal place is the difference between *p* = 0.04 and *p* = 0.09. 
+
+As can be seen, there is not much difference in specifying each model. The MLM only requires the addition of + (1|litter). This is
+the random effect (intercept) for litter.
+```{r} 
+mlm_one <- lmerTest::lmer(y ~ treat + (1|litter), data = dat_yes_icc)
+```{r, eval=TRUE}
+# Random effect block provides the variance estimates
+summary(mlm_one)
+```{r, eval=FALSE}
+# compare to t-test (assuming equal variances)
+t_one  <- lm(y ~ treat, data = dat_yes_icc)
+summary(t_one)
+```
+
+#### Total variance explianed by litter (ICC)
+
+We can then compute the total variance explained by litter as:
+```{r}
+# 1) extract variances from MLM model. This function (VarCorr) extracts
+#    the variances from the fitted models. We put them into a data frame
+#    so that we can more easily compute the ICC of litter.
+mlm_var <- as.data.frame(lme4::VarCorr(mlm_one,comp="Variance"))
+
+# 2) Follow formual X from the paper
+icc_by_hand <- mlm_var$vcov[1] / (mlm_var$vcov[1] + mlm_var$vcov[2])
+
+icc_by_hand
+
+# conviencence function to compute litter ICC 
+# (included in litterEffects package)
+litter_icc <- function(formula, data){
+  mod <- lmerTest::lmer(formula, data)
+  var <- as.data.frame(lme4::VarCorr(mod,comp="Variance"))
+  icc <- mlm_var$vcov[1] / (mlm_var$vcov[1] + mlm_var$vcov[2])
+  list(icc = icc)
+}
+
+litter_icc(y ~ treat + (1|litter), data = dat_yes_icc)
+
+```
+
+#### Significance testing of the litter effect
+
+We do not recommend testing the signifcance of random effects, especially in this situation. This is commonly done, however, so we provide an example here. Please note that, regardless of statisticasl significance, the random effect of litter must be in the model to ensure the assumption of independence is not violated.
+```{r } 
+mlm_two <- lmerTest::lmer(y ~ treat + (1|litter), data = dat_yes_icc)
+#compute significance 
+lmerTest::rand(mlm_two)
+```
+
+#### Between-litter variance explained by the treatment effect
+
+MLMs are flexible methods that allow for answering many research question. For example, one could investigate whether the treatment effect explians between-litter variance. This would be especially beneficial for the natural variations in maternal care literature, because there is explicit interest whether pups from the same dam are similar to one another. We see this as less relevant to pre natal stress literature, although the same modle can be applied there as well.
+```{r}
+# we create a new data frame to emphasiz this point. Here, we make 
+# the treatment effect very large
+dat_large <- sim_data(b_0 = b_0, b_treat = 20, 
+                       icc = icc_yes, v_overall = v_overall, 
+                       n_litters = n_litters, 
+                       pups_litter = pups_litter)
+
+
+# begin by fitting the intercept only model.
+mlm_three <- lmerTest::lmer(y  ~ 1 + (1|litter), data = dat_yes_icc)
+# now include the treatment effect
+mlm_four <- lmerTest::lmer(y  ~ treat + (1|litter), data = dat_yes_icc)
+
+# we now assess how much litter variance was explaine by the treatment effect
+mlm_three_var <- as.data.frame(lme4::VarCorr(mlm_three),comp="Variance")
+mlm_four_var <- as.data.frame(lme4::VarCorr(mlm_four),comp="Variance")
+
+# In this intentionally extreme example, the treatment explains 
+# much of the varibility between litters.
+(mlm_three_var$vcov[1] - mlm_four_var$vcov[2])/mlm_three_var$vcov[1] 
+
+# conviencence function to compute the litter variance explianed
+# by the treatment effect (included in litterEffects package)
+var_explained_by_litter <- function(outcome, treatment, litter){
+  mod_one <- lmerTest::lmer(outcome ~ 1 + (1|litter))
+  mod_two <- lmerTest::lmer(outcome ~ treatment + (1|litter))
+  one_var <- as.data.frame(lme4::VarCorr(mod_one),comp="Variance")
+  two_var <- as.data.frame(lme4::VarCorr(mod_two),comp="Variance")
+  list(var_explained_by_liter = (one_var$vcov[1] - two_var$vcov[2])/one_var$vcov[1] )
+}
+
+var_explained_by_litter(outcome = dat_yes_icc$y, 
+                        treatment = dat_yes_icc$treat, 
+                        litter = dat_yes_icc$litter)
+
+# alternatively
+y <- dat_yes_icc$y
+treatment <- dat_yes_icc$treat
+litter <- dat_yes_icc$litter
+var_explained_by_litter(outcome = y, treatment = treatment, 
+                        litter = litter)
+```
+
+
+
+
