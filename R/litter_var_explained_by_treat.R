@@ -34,7 +34,7 @@
 #'outcome <- my_data$y
 #'treatment <- my_data$treatment
 #'litter <- my_data$litter
-#'var_explained_by_litter(outcome = outcome, 
+#'var_explained_by_treat(outcome = outcome, 
 #'                        treatment = treatment, l
 #'                        itter = litter)
 
