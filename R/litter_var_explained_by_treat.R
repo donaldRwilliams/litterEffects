@@ -44,5 +44,5 @@ litter_var_explained_by_treat <- function(outcome, treatment, litter){
   mod_two <- lmerTest::lmer(outcome ~ treatment + (1|litter))
   one_var <- as.data.frame(lme4::VarCorr(mod_one),comp="Variance")
   two_var <- as.data.frame(lme4::VarCorr(mod_two),comp="Variance")
-  list(var_explained_by_liter = (one_var$vcov[1] - two_var$vcov[2])/one_var$vcov[1] )
+  list(litter_var_explained_by_treat = (one_var$vcov[1] - two_var$vcov[2])/one_var$vcov[1] )
 }
