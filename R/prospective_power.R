@@ -2,6 +2,7 @@
 #'
 #' This function computes power
 #'@export
+#'@example 
 #'example that works
 #'prospective_power(nsims =  20, delta_t = .25, icc = .5, v_overall = 20, 
 #'                   n_litters = 50, pups_litter = 4, method = "GEE", 
