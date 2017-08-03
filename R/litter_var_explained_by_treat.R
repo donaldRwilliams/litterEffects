@@ -5,7 +5,14 @@
 #' explained by the treatment effect. Note that treatment
 #' does not necessarily reflect and experimental design.
 #' In this context, the treatment is a comparison between
-#' two groups (e.g., high vs low lg)
+#' two groups (e.g., high vs low lg).
+#' 
+#' Note that, in some instances, the variance explained
+#' can be negative. In this case, there is more betweem-litter
+#' variance after the inclusion of the treatment effect in the
+#' model. This is cannot be interpreted directly, but does 
+#' indicate that the treatment effect did not explain any
+#' of the between-litter variance
 #'@param formula lme4 arugments y ~ x + (1|litter)
 #'@param data 
 #'@export
