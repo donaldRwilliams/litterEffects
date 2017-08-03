@@ -31,7 +31,7 @@ icc <- 0.5
 v_overall <- 10
 n_litters <- 12
 pups_litter <- 4
-my_data <- data_gen(b_0 = b_0, b_treat = b_treat, 
+my_data <- data_generator(b_0 = b_0, b_treat = b_treat, 
                    icc = icc, v_overall = v_overall, 
-                   n_litters = n_litters, pups_litter = pups_litter)
+                   n_litters = n_litters, pups_litter = pups_litter
 }
