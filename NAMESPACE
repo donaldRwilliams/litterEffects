@@ -3,7 +3,6 @@
 export(bc_plot)
 export(bias_correction)
 export(data_func)
-export(data_generator)
 export(delta_t)
 export(litter_icc)
 export(litter_var_explained_by_treat)
