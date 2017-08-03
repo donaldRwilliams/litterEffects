@@ -2,6 +2,6 @@
 
 export(bc_plot)
 export(bias_correction)
-export(data_func)
+#export(data_func)
 export(data_generator)
 export(results)
