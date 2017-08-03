@@ -10,3 +10,17 @@ prospective_power(nsims, delta_t, icc, v_overall, n_litters, pups_litter,
 \description{
 This function computes power
 }
+\examples{
+example that works
+prospective_power(nsims =  20, delta_t = .25, icc = .5, v_overall = 20, 
+                  n_litters = 50, pups_litter = 4, method = "GEE", 
+                  correction = "d5", parameter = "treatment")
+example that results in error (litter means cannot estimate litter effect)
+prospective_power(nsims =  20, delta_t = .25, icc = .5, v_overall = 20, 
+                  n_litters = 50, pups_litter = 4, method = "LM", 
+                  correction = "d5", parameter = "litter")
+
+
+
+
+}
