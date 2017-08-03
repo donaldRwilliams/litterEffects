@@ -25,6 +25,6 @@
 litter_icc <- function(formula, data){
   mod <- lmerTest::lmer(formula, data)
   var <- as.data.frame(lme4::VarCorr(mod,comp="Variance"))
-  icc <- mlm_var$vcov[1] / (mlm_var$vcov[1] + mlm_var$vcov[2])
+  icc <- var$vcov[1] / (var$vcov[1] + var$vcov[2])
   list(icc = icc)
 }
