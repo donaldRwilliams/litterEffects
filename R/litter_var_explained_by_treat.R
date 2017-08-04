@@ -15,7 +15,8 @@
 #' of the between-litter variance
 #'@param outcome the observations to be predicted
 #'@param treatment predictor (two groups: high vs low LG)
-#'@export litter litter variable (see my_data for example)
+#'@param litter litter variable (see my_data for example)
+#'@export
 #'@examples
 #'
 #'# specify values
