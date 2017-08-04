@@ -8,7 +8,7 @@ can be seen. This funtion does nothing by itself, but is called
 by the function prospective power analyses}
 \usage{
 pow_func(delta_t, icc, v_overall, n_litters, pups_litter, method,
-  parameter = "treatment", correction)
+  parameter = "treatment", correction = "d5")
 }
 \description{
 Called by prospective power
