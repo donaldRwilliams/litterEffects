@@ -1,4 +1,4 @@
-#' GEE Bias Correction testing 1, 2
+#' GEE Bias Correction testing 
 #'
 #' This function allows the user to determine the "correct" bias correction
 #' for generalized estimating equations. The corrections are to ensure the

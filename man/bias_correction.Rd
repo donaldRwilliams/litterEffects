@@ -2,7 +2,7 @@
 % Please edit documentation in R/bias_correction.R
 \name{bias_correction}
 \alias{bias_correction}
-\title{GEE Bias Correction testing 1, 2}
+\title{GEE Bias Correction testing}
 \usage{
 bias_correction(nsim = 500, icc, v_overall, n_litters, pups_litter)
 }
