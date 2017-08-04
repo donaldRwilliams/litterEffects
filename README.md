@@ -10,4 +10,4 @@ consists of two-groups in which entire litters are catergorized the same way. Fo
 natural variations in maternal care literature, rat pups from same litter are categorized as
 low or high LG (licking and grooming).
 
-![alt text] (https://github.com/donaldRwilliams/litterEffects/blob/87db95c06967cc2fc3023a28b88ab82b742abb5a/figure_1_ppt_rev_2.jpg)
+![Alt text] (https://github.com/donaldRwilliams/litterEffects/blob/87db95c06967cc2fc3023a28b88ab82b742abb5a/figure_1_ppt_rev_2.jpg)
