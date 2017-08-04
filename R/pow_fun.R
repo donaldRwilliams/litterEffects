@@ -1,6 +1,6 @@
 #' Called by prospective power
-
-#' Please not this function is included so that the underlying code
+#'
+#' Please note this function is included so that the underlying code
 #' can be seen. This funtion does nothing by itself, but is called
 #' by the function prospective power analyses
 #' @export

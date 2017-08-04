@@ -2,17 +2,13 @@
 % Please edit documentation in R/pow_fun.R
 \name{pow_func}
 \alias{pow_func}
-\title{Called by prospective power
-Please not this function is included so that the underlying code
-can be seen. This funtion does nothing by itself, but is called
-by the function prospective power analyses}
+\title{Called by prospective power}
 \usage{
 pow_func(delta_t, icc, v_overall, n_litters, pups_litter, method,
   parameter = "treatment", correction = "d5")
 }
 \description{
-Called by prospective power
-Please not this function is included so that the underlying code
+Please note this function is included so that the underlying code
 can be seen. This funtion does nothing by itself, but is called
 by the function prospective power analyses
 }
