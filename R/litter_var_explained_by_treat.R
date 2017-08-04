@@ -40,7 +40,6 @@
 #'                        treatment = treatment, 
 #'                        litter = litter)
 
-
 litter_var_explained_by_treat <- function(outcome, treatment, litter){
   mod_one <- lmerTest::lmer(outcome ~ 1 + (1|litter))
   mod_two <- lmerTest::lmer(outcome ~ treatment + (1|litter))

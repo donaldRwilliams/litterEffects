@@ -6,7 +6,7 @@
 #' @examples
 #' power_func()
 pow_func <- function(delta_t, icc, v_overall, n_litters, pups_litter, 
-                     method, parameter = "treatment", correction){
+                     method, parameter = "treatment", correction = "d5"){
   b_treat = delta_t * sqrt(v_overall)
   dat <- litterEffects::data_generator(b_0 = 5,
                                        b_treat = b_treat, v_overall = v_overall,
