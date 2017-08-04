@@ -7,7 +7,6 @@
 #'@param treatment (two groups: high vs low LG)
 #'@param litter litter variable (see my_data for example)
 #'@export
-#'@examples
 
 
 
@@ -27,7 +26,7 @@ retrospective_power <- function(nsims, outcome, treatment, litter){
   b_0 <- summary(mod)$coefficients[[1]]
   #delta_t <- b_treat/sqrt(var$vcov[1] + var$vcov[2])
   m <- mean(replicate(nsims, 
-                      retro_dat_fun(b_0 = b_0, b_treat = b_treat,
+                      retro_pow_fun(b_0 = b_0, b_treat = b_treat,
                                     icc = icc, n_litters = n_litters, 
                                     v_overall = v_overall,
                                     pups_litter = pups_litter)) < 0.05)
