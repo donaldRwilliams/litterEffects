@@ -11,7 +11,7 @@
 
 
 
-retropsective_power <- function(nsims, outcome, treatment, litter){
+retrospective_power <- function(nsims, outcome, treatment, litter){
   dat_temp <- data.frame(litter, treatment)
   data_temp <- dat_temp %>% 
     group_by(litter) %>% 
