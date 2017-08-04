@@ -5,7 +5,7 @@
 \title{Prospective Power Analyses}
 \usage{
 prospective_power(nsims, delta_t, icc, v_overall, n_litters, pups_litter,
-  method, parameter = "treatment", correction)
+  method, parameter = "treatment", correction = "d5")
 }
 \arguments{
 \item{nsims}{number of iterations. Should be > 1,000, but smaller values can 
@@ -23,11 +23,9 @@ build intution for expected power}
 
 \item{method}{model: "MLM", "GEE", "LM" for litter means}
 
-\item{parameter}{default is "treatment"
-set to "litter" for computing
-power to detect litter effect (random intercept)}
+\item{parameter}{default is "treatment" (see details)}
 
-\item{correction}{bias correction for GEE. 
+\item{correction}{bias correction for GEE (see details) 
 "d5" was used in manuscript
 see saws package documentation for other options}
 }
@@ -35,6 +33,13 @@ see saws package documentation for other options}
 This function computes power for multilevel models, generalized estimating equations,
 and litter means. For multilevel models, power for the treatment and litter effects can 
 be caluculated.
+}
+\details{
+Power for the litter effect (random intercept) can be calculated by setting the parameter
+to "litter". Note that computing power for a litter effect is not possible with GEE or LM
+(litter means). The bias correction is tenatively set to "d5" (what was used in the paper). 
+Further details can be found in bias correction reference section. Note that, in the future, 
+we may remove this default and user will have to select the most approapriate bias correction.
 }
 \examples{
 example that works

@@ -11,6 +11,8 @@ litter_var_explained_by_treat(outcome, treatment, litter)
 \item{outcome}{the observations to be predicted}
 
 \item{treatment}{predictor (two groups: high vs low LG)}
+
+\item{litter}{litter variable (see my_data for example)}
 }
 \description{
 This function computes the between_litter variance
