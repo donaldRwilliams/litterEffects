@@ -5,7 +5,7 @@
 retro_func <- function(x){
   length(x)
 }
-
+#' @export
 retro_pow_fun <- function (b_0 = b_0, b_treat = b_treat, icc, v_overall, 
                            n_litters, pups_litter) {
   dat <- litterEffects::data_generator(b_0 = b_0, b_treat = b_treat, 
