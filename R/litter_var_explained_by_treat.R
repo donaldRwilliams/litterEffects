@@ -13,9 +13,9 @@
 #' model. This is cannot be interpreted directly, but does 
 #' indicate that the treatment effect did not explain any
 #' of the between-litter variance
-#'@param formula lme4 arugments y ~ x + (1|litter)
-#'@param data 
-#'@export
+#'@param outcome the observations to be predicted
+#'@param treatment predictor (two groups: high vs low LG)
+#'@export litter litter variable (see my_data for example)
 #'@examples
 #'
 #'# specify values
@@ -27,16 +27,17 @@
 #'pups_litter <- 4
 
 #'my_data <- data_generator(b_0 = b_0, b_treat = b_treat, 
-#'                    icc = icc, v_overall = v_overall, 
-#'                    n_litters = n_litters, pups_litter = pups_litter)
+#'                          icc = icc, v_overall = v_overall, 
+#'                          n_litters = n_litters, 
+#'                          pups_litter = pups_litter)
 #'                    
 #'                    
 #'outcome <- my_data$y
 #'treatment <- my_data$treatment
 #'litter <- my_data$litter
 #'var_explained_by_treat(outcome = outcome, 
-#'                        treatment = treatment, l
-#'                        itter = litter)
+#'                        treatment = treatment, 
+#'                        litter = litter)
 
 
 litter_var_explained_by_treat <- function(outcome, treatment, litter){

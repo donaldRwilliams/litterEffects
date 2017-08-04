@@ -7,8 +7,34 @@
 prospective_power(nsims, delta_t, icc, v_overall, n_litters, pups_litter,
   method, parameter = "treatment", correction)
 }
+\arguments{
+\item{nsims}{number of iterations. Should be > 1,000, but smaller values can 
+build intution for expected power}
+
+\item{delta_t}{standardized effect size. Follows Cohen's guidelines}
+
+\item{icc}{residual variance explained by litter (0 - 0.99)}
+
+\item{v_overall}{total variance in the model}
+
+\item{n_litters}{number of litters (must be even)}
+
+\item{pups_litter}{number of pups per litter (must be even)}
+
+\item{method}{model: "MLM", "GEE", "LM" for litter means}
+
+\item{parameter}{default is "treatment"
+set to "litter" for computing
+power to detect litter effect (random intercept)}
+
+\item{correction}{bias correction for GEE. 
+"d5" was used in manuscript
+see saws package documentation for other options}
+}
 \description{
-This function computes power
+This function computes power for multilevel models, generalized estimating equations,
+and litter means. For multilevel models, power for the treatment and litter effects can 
+be caluculated.
 }
 \examples{
 example that works

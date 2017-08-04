@@ -8,9 +8,9 @@ the treatment effect}
 litter_var_explained_by_treat(outcome, treatment, litter)
 }
 \arguments{
-\item{formula}{lme4 arugments y ~ x + (1|litter)}
+\item{outcome}{the observations to be predicted}
 
-\item{data}{}
+\item{treatment}{predictor (two groups: high vs low LG)}
 }
 \description{
 This function computes the between_litter variance
@@ -37,14 +37,15 @@ v_overall <- 10
 n_litters <- 12
 pups_litter <- 4
 my_data <- data_generator(b_0 = b_0, b_treat = b_treat, 
-                   icc = icc, v_overall = v_overall, 
-                   n_litters = n_litters, pups_litter = pups_litter)
+                         icc = icc, v_overall = v_overall, 
+                         n_litters = n_litters, 
+                         pups_litter = pups_litter)
                    
                    
 outcome <- my_data$y
 treatment <- my_data$treatment
 litter <- my_data$litter
 var_explained_by_treat(outcome = outcome, 
-                       treatment = treatment, l
-                       itter = litter)
+                       treatment = treatment, 
+                       litter = litter)
 }
