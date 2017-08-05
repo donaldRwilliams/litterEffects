@@ -7,8 +7,8 @@ output:
   pdf_document: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 This tutorial accompanies the paper *Between-litter variation in developmental studies of hormones and behavior: inflated false positives and diminished power*. This tutorial can address all recommendations provided in the manuscript. This tutorial is not meant to thoroughly cover the topic of analyzing dependent observations or multilevel modeling in general. Further background information can be obtained from the reference section of the paper.
