@@ -14,4 +14,4 @@ This package is specifically for the research design discussed in the paper Betw
 Williams, D., Carlsson, R., & Bürkner, P.-C. (2017, June 10). Between-litter variation in developmental studies of hormones and behavior: inflated false positives and diminished power. Retrieved from osf.io/preprints/psyarxiv/z9hwx [link to paper (pre-print)](osf.io/preprints/psyarxiv/z9hwx)
  
 ## Tutorial:
-[link to tutorial that implements all recommedations in the paper](http://rpubs.com/wdonald1985/296947)
+*LitterEffects*: tutorial[link](http://rpubs.com/wdonald1985/296947)
