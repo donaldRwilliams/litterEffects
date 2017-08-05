@@ -16,7 +16,7 @@ This tutorial accompanies the paper *Between-litter variation in developmental s
 I cannot provide recommendations for reporting results. I use Bayesian methods in applied settings, so do not have the 
 expertise in reporting classical (those that include *p*-values, test statistics, etc.) methods. I do, however, examine the statistical properties of classical methods often.
 
-I begin each section by providing techniques to obtain the necessary information directly from the fitted models. The aim here is to show the "inner workings" of the methods. I end each section with a convenience function that is provided in the litterEffects package.
+I begin each section by providing techniques to obtain the necessary information directly from the fitted models. The aim here is to show the "inner workings" of the methods. I end each section with a convenience function that is provided in the *litterEffects* package.
 
 The tutorial is organized as follows:
 
