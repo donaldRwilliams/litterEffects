@@ -65,6 +65,7 @@ install.packages("ggplot2")
 install.packages("dplyr")
 install.packages("lmerTest")
 install.packages("effsize")
+install.packages("devtools")
 install.packages(devtools::install_github("donaldRwilliams/litterEffects")))
 ```
 Load the following packages:
@@ -214,7 +215,7 @@ gee_one <- gee::gee(y ~ treat, id = litter, data = data_gee,
 # obtain z-value
 z <- summary(gee_one)[[7]][10]
 
-# convert to two-side p-value
+# convert to two-sided p-value
 p_default   <- 2*pnorm(-abs(z))
 
 # apply bias correction for optimal SE (thus p-value)    
