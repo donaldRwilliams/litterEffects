@@ -3,12 +3,8 @@ title: 'litterEffects: Tutorial'
 author: "Donald R. Williams"
 date: "August 2, 2017"
 output:
-<<<<<<< HEAD
   html_document: default
   pdf_document: default
-=======
-  output: rmarkdown::github_document
->>>>>>> cae49c08a66ef5fc689c5c8ea9ac390d0718843d
 ---
 
 ```{r setup, include=FALSE}
@@ -49,7 +45,7 @@ The tutorial is organized as follows:
 5. Bias Correction: GEE
 
 Install the following packages:
-```{r eval = FALSE, echo = TRUE, error = TRUE, }
+```{r eval = FALSE, echo = TRUE, error = TRUE}
 install.packages("ggplot2")
 install.packages("dplyr")
 install.packages("lmerTest")
@@ -69,11 +65,7 @@ Load the example data set:
 ```{r echo = TRUE, eval = TRUE}
 # data included in the litterEffects package
 my_data <- litterEffects::my_data
-<<<<<<< HEAD
-```{r eval = FALSE, include = FALSE}
-=======
 ```{r eval = FALSE}
->>>>>>> cae49c08a66ef5fc689c5c8ea9ac390d0718843d
 # to load your own data
 # (ensure the csv file is in the working directory)
 my_data <- read.csv("your_data.csv")
@@ -228,7 +220,6 @@ d <- effsize::cohen.d(y ~ treat, data_means)
 d
 ```
 This concludes the data analysis section. As stated in the paper, MLMs provide far richer information for inference. This is clearly seen in this tutorial. If using a GEE or analyzing litter means with a *t*-test, one can only compare groups. These methods cannot provide estimates of between-litter variance or the amount of litter variance explained by the treatment effect. The former (estimates of between-litter variance) is critical for computing prospective power analyses.
-<<<<<<< HEAD
 
 # 2. Prospective Power
 The *litterEffects* package allows for assessing power to detect a treatment effect (difference between two group). Delta total variance \(\delta_{t}\) is on Cohen's *d* scale: small = 0.20; medium = 0.50; large = 0.80. I recommend > 1,000 iterations for nsims, although multiple runs with smaller values can build an intuition for expected power. 
@@ -236,15 +227,6 @@ The *litterEffects* package allows for assessing power to detect a treatment eff
 ## Multilevel Model
 #### Treatment Effect
 
-=======
-
-# 2. Prospective Power
-The *litterEffects* package allows for assessing power to detect a treatment effect (difference between two group). Delta total variance \(\delta_{t}\) is on Cohen's *d* scale: small = 0.20; medium = 0.50; large = 0.80. I recommend > 1,000 iterations for nsims, although multiple runs with smaller values can build an intuition for expected power. 
-
-## Multilevel Model
-#### Treatment Effect
-
->>>>>>> cae49c08a66ef5fc689c5c8ea9ac390d0718843d
 ```{r eval=FALSE}
 # power for large effect with little between-litter variance (icc = 10 %)
 litterEffects::prospective_power(nsims =  200, delta_t = 0.80, icc = .10, 
@@ -254,7 +236,6 @@ litterEffects::prospective_power(nsims =  200, delta_t = 0.80, icc = .10,
 litterEffects::prospective_power(nsims =  200, delta_t = 0.80, icc = .80, 
                                  v_overall = 10, n_litters = 12, pups_litter = 2, 
                                  method = "MLM", parameter = "treatment")
-<<<<<<< HEAD
 ```
 #### Litter Effect
 The power to detect a litter effect is related to the icc value and the sample sizes (for n_litter and pups_litter).
@@ -268,21 +249,6 @@ litterEffects::prospective_power(nsims =  200, delta_t = 0.80, icc = .60,
                                  v_overall = 10, n_litters = 12, pups_litter = 2, 
                                  method = "MLM", parameter = "litter")
 ```
-=======
-```
-#### Litter Effect
-The power to detect a litter effect is related to the icc value and the sample sizes (for n_litter and pups_litter).
-```{r eval=FALSE}
-# power to detect litter effect when litter explains 10 % of the total variance
-litterEffects::prospective_power(nsims =  200, delta_t = 0.80, icc = .10, 
-                                 v_overall = 10, n_litters = 12, pups_litter = 2, 
-                                 method = "MLM", parameter = "litter")
-# power to detect litter effect when litter explains 60 % of the total variance
-litterEffects::prospective_power(nsims =  200, delta_t = 0.80, icc = .60, 
-                                 v_overall = 10, n_litters = 12, pups_litter = 2, 
-                                 method = "MLM", parameter = "litter")
-```
->>>>>>> cae49c08a66ef5fc689c5c8ea9ac390d0718843d
 I re-emphasize (section *4.2. Conditional false positives* of the paper) that significance testing cannot provide evidence for zero dependencies in the data. A non-significant effect should not be confused with NO litter effect, or that the litter effect is negligible and can thus be excluded. The assumption of independent observations has nothing to do with null hypothesis significance testing. Of course, if power is very high, then one could more reliably detect very small amounts of between-litter variance. This is not the case in behavioral neuroendocrinology (or all research using rodents), so even large amounts of between-litter variance can go undetected and this is where false positive rates are particularly high.
 
 ## Generalized Estimating Equation
